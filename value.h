@@ -7,7 +7,8 @@
 #include "common.h"
 
 using Value = double;
-
 using ValueArray = Array<Value>;
+
+void print_value(const Value& value);
 
 #endif /* VALUE_H */

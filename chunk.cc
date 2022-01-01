@@ -21,6 +21,11 @@ void free_chunk(Chunk* chunk, Allocator& allocator) {
 }
 
 //-----------------------------------------------------------------------------
+void write_chunk(Chunk* chunk, OpCode op, Allocator& allocator) {
+  write_chunk(chunk, to_uint8(op), allocator);
+}
+
+//-----------------------------------------------------------------------------
 void write_chunk(Chunk* chunk, uint8_t byte, Allocator& allocator) {
   // Do we need to reallocate array?
   if (chunk->capacity < chunk->count + 1) {
