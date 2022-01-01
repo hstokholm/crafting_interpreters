@@ -29,12 +29,14 @@ template <typename T>
 void write_array(Array<T>* array, T value, Allocator& allocator) {
   // Do we need to reallocate array?
   if (array->capacity < array->count + 1) {
-    const uint32_t old_capacity = array->capacity;
     array->capacity = ((array->capacity) < 8 ? 8 : (array->capacity) * 2);
     array->data =
-        static_cast<T*>(allocator.realloc(array->data, array->capacity));
+        static_cast<T*>(allocator.realloc(array->data, array->capacity * sizeof(T)));
   }
 
   array->data[array->count] = value;
   array->count++;
 }
+
+using ByteArray = Array<uint8_t>;
+using UIntArray = Array<uint32_t>;

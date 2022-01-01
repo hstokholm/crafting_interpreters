@@ -15,7 +15,7 @@ uint32_t simple_instruction(const char* name, uint32_t offset) {
 
 //-----------------------------------------------------------------------------
 uint32_t constant_instruction(const char* name, Chunk* chunk, uint32_t offset) {
-  uint8_t constant = chunk->code[offset + 1];
+  uint8_t constant = chunk->code.data[offset + 1];
   printf("%-16s %4d '", name, constant);
   print_value(chunk->constants.data[constant]);
   printf("'\n");
@@ -28,7 +28,7 @@ uint32_t constant_instruction(const char* name, Chunk* chunk, uint32_t offset) {
 void disassemble_chunk(Chunk* chunk, const char* name) {
   printf("== %s ==\n", name);
 
-  for (int offset = 0; offset < chunk->count;) {
+  for (int offset = 0; offset < chunk->code.count;) {
     offset = disassemble_instruction(chunk, offset);
   }
 }
@@ -37,7 +37,14 @@ void disassemble_chunk(Chunk* chunk, const char* name) {
 uint32_t disassemble_instruction(Chunk* chunk, int offset) {
   printf("%04d ", offset);
 
-  uint8_t instruction = chunk->code[offset];
+  if (offset > 0 &&
+      chunk->lines.data[offset] == chunk->lines.data[offset - 1]) {
+    printf("   | ");
+  } else {
+    printf("%4d ", chunk->lines.data[offset]);
+  }
+
+  uint8_t instruction = chunk->code.data[offset];
   switch (OpCode(instruction)) {
     case OpCode::CONSTANT:
       return constant_instruction("OP_CONSTANT", chunk, offset);
