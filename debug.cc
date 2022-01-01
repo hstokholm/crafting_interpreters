@@ -50,6 +50,8 @@ uint32_t disassemble_instruction(Chunk* chunk, int offset) {
       return constant_instruction("OP_CONSTANT", chunk, offset);
     case OpCode::RETURN:
       return simple_instruction("OP_RETURN", offset);
+    case OpCode::NEGATE:
+      return simple_instruction("OP_NEGATE", offset);
     default:
       printf("Unknown opcode %d\n", instruction);
       return offset + 1;

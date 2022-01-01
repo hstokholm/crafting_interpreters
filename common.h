@@ -4,6 +4,9 @@
 #include <cstdint>
 #include <cstdlib>
 
+#define DEBUG_TRACE_EXECUTION 1
+#define STACK_MAX 256
+
 class HeapAllocator {
  public:
   void* alloc(uint64_t size) const { return malloc(size); }

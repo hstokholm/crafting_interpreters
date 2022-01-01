@@ -17,5 +17,8 @@ add_executable(crafting_interpreters
 
   value.cc
   value.h
+
+  vm.cc
+  vm.h
 )
 
