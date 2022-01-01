@@ -14,5 +14,8 @@ add_executable(crafting_interpreters
 
   debug.cc
   debug.h
+
+  value.cc
+  value.h
 )
 

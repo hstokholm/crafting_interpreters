@@ -9,10 +9,10 @@
 int main(int argc, const char* argv[]) {
   Allocator allocator;
   Chunk chunk;
-  initChunk(&chunk);
-  writeChunk(&chunk, to_uint8(OpCode::RETURN), allocator);
+  init_chunk(&chunk);
+  write_chunk(&chunk, to_uint8(OpCode::RETURN), allocator);
   debug::disassemble_chunk(&chunk, "test chunk");
-  freeChunk(&chunk, allocator);
+  free_chunk(&chunk, allocator);
 
   // Allow the user to actually see the console output prior to quiting
   printf("Press Enter to exit...");
