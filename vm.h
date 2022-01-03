@@ -17,6 +17,9 @@ class VM {
   uint8_t read_byte();
   Value read_constant();
 
+  template <typename T>
+  void binary_op();
+
   void push(Value value);
   Value pop();
 
