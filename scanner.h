@@ -69,9 +69,20 @@ class Scanner {
   const char peek_next() const;
   const char advance();
   bool match(char expected);
+
   const Token make_token(TokenType type) const;
   const Token error_token(const char* message) const;
+  const Token string();
+  const Token number();
+  const Token identifier();
+
+  TokenType identifier_type() const;
+  TokenType check_keyword(uint8_t start, uint8_t length, const char* rest,
+                          TokenType type) const;
+
   bool is_at_end() const;
+  bool is_digit(char c) const;
+  bool is_alpha(char c) const;
 
   const char* start;
   const char* current;
